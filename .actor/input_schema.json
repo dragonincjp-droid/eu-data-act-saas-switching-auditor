@@ -1,0 +1,122 @@
+{
+  "title": "EU Data Act SaaS Switching & Zero-Egress Fee Auditor Input",
+  "description": "Audit B2B/B2C SaaS platforms, PaaS/IaaS cloud services, developer APIs, and hosted AI platforms via fast zero-browser HTTP for EU Data Act (Reg. (EU) 2023/2854 Chapter VI) Jan 12, 2027 €0 switching & data egress rules (Art. 29(1)), free open export interfaces (Art. 30(2)), Art. 25(2) 30-day transition/retrieval terms, Art. 26(b) online portability registers, Art. 28/32 ICT jurisdiction & non-personal data gov-access notices, and EU DORA exit readiness.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "urls": {
+      "title": "Target SaaS / Cloud URLs or Bare Domains",
+      "type": "array",
+      "description": "List of SaaS, PaaS, IaaS, cloud API, or hosted AI platform URLs or bare domains to audit (supports full URLs like \"https://acmecloud.example.com\", bare domains like \"acmecloud.io\", or RequestList objects like [{\"url\": \"https://acmecloud.io\"}]).",
+      "editor": "stringList",
+      "prefill": [
+        "https://example.com"
+      ]
+    },
+    "url": {
+      "title": "Single SaaS / Cloud URL or Domain (Optional Shorthand)",
+      "type": "string",
+      "description": "Optional single URL/domain convenience field for REST webhooks, Clay HTTP columns, n8n workflows, or MCP calls.",
+      "editor": "textfield"
+    },
+    "datasetId": {
+      "title": "Upstream Apify Dataset ID (Optional Chaining)",
+      "type": "string",
+      "description": "Optional Apify Dataset ID (e.g. from Product Hunt / G2 / B2B SaaS Lead Scraper or Crunchbase Finder) to auto-import SaaS URLs and deduplicate with urls.",
+      "editor": "textfield"
+    },
+    "datasetUrlField": {
+      "title": "Dataset URL Field Override (Optional)",
+      "type": "string",
+      "description": "Optional column name to extract URLs from datasetId items. When omitted, auto-detects website, url, domain, saasUrl, appUrl, companyUrl, vendorUrl, homepageUrl, shopUrl, or storeUrl.",
+      "editor": "textfield"
+    },
+    "maxLegalPagesPerDomain": {
+      "title": "Max Internal Legal/Pricing/Trust/Docs Subpages per Domain",
+      "type": "integer",
+      "description": "Maximum number of discovered same-origin internal subpages (/data-act, /cloud-switching, /portability, /terms, /tos, /msa, /legal, /dpa, /pricing, /plans, /trust, /security, /subprocessors, /compliance, /docs/export, /api) fetched per domain in addition to the homepage (0-6).",
+      "default": 4,
+      "minimum": 0,
+      "maximum": 6,
+      "editor": "number"
+    },
+    "includeRemediationPack": {
+      "title": "Generate EU Data Act Addendum + Art. 26(b)/28 Register + €0 Egress HTML/JS Pack",
+      "type": "boolean",
+      "description": "Generates domain-customized EU Data Act Chapter VI Switching Addendum HTML (aligned with Commission Recommendation (EU) 2026/2394), Art. 26(b) Online Portability Register + Art. 28/32 Jurisdiction & Non-Personal Gov-Access Page HTML, and /pricing €0 Egress Widget HTML/JS when findings exist (+$0.01/site).",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "checkEgressFeesAndExportPaywalls": {
+      "title": "Check Art. 29(1) €0 Egress/Switching Cliff & Art. 30(2) Export Paywalls",
+      "type": "boolean",
+      "description": "Flags explicit data egress, switching, offboarding, or data-extraction fees and Enterprise-only CSV/JSON/API export paywalls lacking an EU Data Act Art. 29(1) €0 switching & Art. 30(2) free open-interface guarantee.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "checkArt25SwitchingTermsAndLockIn": {
+      "title": "Check Art. 25(2) Switching Addendum, <30-Day Deletion & >2-Month Notice Lock-In",
+      "type": "boolean",
+      "description": "Flags immediate or <30-day post-termination data deletion (violating Art. 25(2)(g) ≥30-day retrieval), >2-month initiation notice periods (violating Art. 25(2)(d)), and missing Chapter VI Cloud Switching Addenda.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "checkArt26bRegisterAndArt28Notice": {
+      "title": "Check Art. 26(b) Online Portability Register & Art. 28/32 Jurisdiction/Gov-Access Notices",
+      "type": "boolean",
+      "description": "Checks for an Art. 26(b) provider-hosted online register of exportable data structures/formats (JSON/CSV/Parquet/OpenAPI) AND Art. 28(1)/32 website disclosures of ICT hosting jurisdiction and non-personal data governmental-access safeguards.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "checkArt29TerminationAndDoraExit": {
+      "title": "Check Art. 29(4) Fixed-Term Termination & EU DORA Art. 30(2)(h) Exit Transparency",
+      "type": "boolean",
+      "description": "Checks enterprise/financial-grade SaaS platforms (SOC 2 / ISO 27001 / Trust Center) and fixed-term annual contracts for clear Art. 29(4) early-termination fee methodology and EU DORA (Reg. 2022/2554) documented exit-strategy support.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "respectRobotsTxt": {
+      "title": "Respect robots.txt",
+      "type": "boolean",
+      "description": "Checks domain /robots.txt rules before scanning and skips disallowed paths.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "maxUrls": {
+      "title": "Max Domains Safety Cap",
+      "type": "integer",
+      "description": "Hard ceiling on the total number of domains audited in a single run to prevent accidental budget overruns.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 5000,
+      "editor": "number"
+    },
+    "maxConcurrency": {
+      "title": "Max Concurrent HTTP Workers",
+      "type": "integer",
+      "description": "Maximum parallel HTTP domain workers (1-20).",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 20,
+      "editor": "number"
+    },
+    "domainDelayMs": {
+      "title": "Per-Domain Polite Delay (ms)",
+      "type": "integer",
+      "description": "Minimum polite delay in milliseconds between consecutive HTTP requests to the same hostname.",
+      "default": 300,
+      "minimum": 0,
+      "maximum": 30000,
+      "editor": "number"
+    },
+    "requestTimeoutMs": {
+      "title": "HTTP Request Timeout (ms)",
+      "type": "integer",
+      "description": "Strict timeout per HTTP request in milliseconds (default 12000ms).",
+      "default": 12000,
+      "minimum": 2000,
+      "maximum": 60000,
+      "editor": "number"
+    }
+  }
+}

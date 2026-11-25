@@ -1,0 +1,13 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "EU Data Act SaaS Switching & Zero-Egress Fee Audit Output",
+  "description": "Structured per-domain EU Data Act (Reg. (EU) 2023/2854 Chapter VI) SaaS/cloud switching & Jan 12, 2027 €0 egress compliance findings, 36-SDK SaaS/Billing/Auth/Trust/Docs fingerprints, Art. 25 contract checks, Art. 26(b) portability register & Art. 28/32 jurisdiction notices, B2B cold outreach hooks, and HTML/JS remediation packs stored in the default Dataset.",
+  "properties": {
+    "auditResults": {
+      "type": "string",
+      "title": "EU Data Act SaaS Switching & Zero-Egress Compliance Dataset",
+      "description": "Per-domain complianceScore, riskTier, isSaasOrCloudServiceDetected, billingSdkVendors, egressOrSwitchingFeeFound, exportPaywallOrTierLockFound, switchingAddendumFound, art26bOnlinePortabilityRegisterFound, art28IctJurisdictionDisclosed, coldOutreachHook, and remediationPack.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

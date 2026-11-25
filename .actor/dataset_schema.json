@@ -1,0 +1,345 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "required": [
+      "url",
+      "domain",
+      "auditedAt",
+      "status",
+      "isSaasOrCloudServiceDetected",
+      "complianceScore",
+      "riskTier",
+      "disclaimer"
+    ],
+    "properties": {
+      "url": {
+        "type": "string",
+        "description": "Original input SaaS/cloud URL or bare domain requested for auditing."
+      },
+      "normalizedInputUrl": {
+        "type": "string",
+        "description": "Normalized HTTP/HTTPS URL derived from input."
+      },
+      "finalUrl": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Resolved homepage URL after validated HTTP redirects."
+      },
+      "domain": {
+        "type": "string",
+        "description": "Target SaaS/cloud hostname."
+      },
+      "auditedAt": {
+        "type": "string",
+        "description": "ISO 8601 UTC audit timestamp."
+      },
+      "status": {
+        "type": "string",
+        "description": "Audit execution status (audited, blocked_ssrf, blocked_robots, error)."
+      },
+      "httpStatus": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Homepage HTTP response status code."
+      },
+      "pageTitle": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "HTML document <title> of the homepage."
+      },
+      "detectedLanguage": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Detected HTML language code (e.g. en)."
+      },
+      "sitePlatform": {
+        "type": "string",
+        "description": "Detected web/docs platform (nextjs, webflow, framer, wordpress, docusaurus, mintlify, shopify, custom)."
+      },
+      "siteCategory": {
+        "type": "string",
+        "description": "Classified domain category (b2b_or_b2c_saas, cloud_or_api_infra, ai_or_data_platform, ecommerce_or_marketplace, brochure_or_content)."
+      },
+      "loadTimeMs": {
+        "type": "number",
+        "description": "Total domain audit duration in milliseconds."
+      },
+      "pagesFetchedCount": {
+        "type": "integer",
+        "description": "Total HTML pages fetched for this domain (homepage + discovered internal legal/pricing/trust/docs subpages)."
+      },
+      "pagesFetched": {
+        "type": "array",
+        "description": "URLs of all HTML pages inspected on this domain."
+      },
+      "errorMessage": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Diagnostic error or security block reason when status is not audited."
+      },
+      "isSaasOrCloudServiceDetected": {
+        "type": "boolean",
+        "description": "Whether EU Data Act Art. 2(8) data processing service (SaaS/PaaS/IaaS/Cloud API/AI) SDKs or structural signals were detected."
+      },
+      "complianceScore": {
+        "type": "number",
+        "description": "Deterministic 0-100 EU Data Act Chapter VI & DORA SaaS switching compliance score (100 = no heuristic issues detected; 0 is returned on non-audited error/blocked rows where status !== \"audited\")."
+      },
+      "riskTier": {
+        "type": "string",
+        "description": "Heuristic compliance risk tier: CRITICAL, HIGH, MEDIUM, or LOW."
+      },
+      "billingSdkVendors": {
+        "type": "array",
+        "description": "Detected billing & subscription SDKs (stripe-billing, paddle, chargebee, recurly, lemon-squeezy, zuora, fastspring, braintree)."
+      },
+      "authIdentityVendors": {
+        "type": "array",
+        "description": "Detected auth & B2B SSO identity SDKs (auth0, clerk, workos, okta, stytch, supabase-auth, firebase-auth, cognito)."
+      },
+      "trustCenterGrcVendors": {
+        "type": "array",
+        "description": "Detected Trust Center & GRC platforms (vanta, drata, safebase, conveyor, whistic, onetrust, secureframe, sprinto)."
+      },
+      "docsStatusSupportVendors": {
+        "type": "array",
+        "description": "Detected developer docs, status & support markers (statuspage, betterstack, instatus, swagger-openapi, mintlify, readme-io, gitbook, docusaurus, intercom, zendesk, crisp, hubspot)."
+      },
+      "saasApplicabilitySignals": {
+        "type": "array",
+        "description": "Matched SaaS/cloud applicability signals (SDK fingerprints, app login/console links, subscription tiers, API/cloud terms)."
+      },
+      "egressOrSwitchingFeeFound": {
+        "type": "boolean",
+        "description": "Whether explicit data egress, switching, offboarding, or data-extraction charges were detected without an Art. 29(1) €0 switching carve-out."
+      },
+      "exportPaywallOrTierLockFound": {
+        "type": "boolean",
+        "description": "Whether CSV/JSON/API bulk data export is gated behind higher or Enterprise-only plans in conflict with Art. 30(2) & Art. 29(1)."
+      },
+      "egressAndExportInterfaceCheck": {
+        "type": "object",
+        "description": "Detailed EU Data Act Art. 29(1) Jan 12, 2027 €0 egress/switching cliff & Art. 30(2) free open-interface analysis."
+      },
+      "shortPostTerminationRetentionFound": {
+        "type": "boolean",
+        "description": "Whether Terms state customer data is deleted immediately or in <30 calendar days upon termination/cancellation (violating Art. 25(2)(g))."
+      },
+      "excessiveNoticePeriodLockInFound": {
+        "type": "boolean",
+        "description": "Whether Terms require >2 months (e.g. 90 days) prior written notice to initiate switching/termination without an Art. 25(2)(d) override."
+      },
+      "switchingAddendumFound": {
+        "type": "boolean",
+        "description": "Whether an EU Data Act Chapter VI Cloud/SaaS Switching Addendum (Art. 25 ≤2-month notice, ≤30-day transition, ≥30-day retrieval) was found."
+      },
+      "art25SwitchingContractCheck": {
+        "type": "object",
+        "description": "Detailed EU Data Act Art. 25(1)-(5) mandatory written switching contract clauses & Recommendation (EU) 2026/2394 analysis."
+      },
+      "art26bOnlinePortabilityRegisterFound": {
+        "type": "boolean",
+        "description": "Whether an Art. 26(b) provider-hosted online register detailing exportable data structures, formats (JSON/CSV/OpenAPI), and interoperability specs was found."
+      },
+      "art28IctJurisdictionDisclosed": {
+        "type": "boolean",
+        "description": "Whether Art. 28(1)(a) ICT infrastructure hosting jurisdiction is publicly disclosed on the website."
+      },
+      "art28NonPersonalGovAccessSafeguardsDisclosed": {
+        "type": "boolean",
+        "description": "Whether Art. 28(1)(b) & Art. 32 technical, organisational, and contractual safeguards against unlawful foreign governmental access to non-personal EU data are disclosed."
+      },
+      "art26bAndArt28TransparencyCheck": {
+        "type": "object",
+        "description": "Detailed EU Data Act Art. 26(b) Online Portability Register and Art. 28(1)/32 ICT Jurisdiction & Non-Personal Gov-Access transparency analysis."
+      },
+      "nonCancellableFixedTermFound": {
+        "type": "boolean",
+        "description": "Whether fixed-term annual/multi-year non-cancellable or no-refund commitment language was detected."
+      },
+      "art29EarlyTerminationAndDoraExitGapFound": {
+        "type": "boolean",
+        "description": "Whether fixed-term or enterprise/financial SaaS signals lack clear Art. 29(4) early-termination methodology or EU DORA Art. 30(2)(h) exit-strategy support."
+      },
+      "art29TerminationAndDoraExitCheck": {
+        "type": "object",
+        "description": "Detailed EU Data Act Art. 29(4) fixed-term early-termination transparency & EU DORA (Reg. 2022/2554 Art. 28(8) / Art. 30(2)(h)) exit-strategy analysis."
+      },
+      "dataActAddendumUrl": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Discovered EU Data Act / Cloud Switching Addendum URL."
+      },
+      "portabilityRegisterUrl": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Discovered Art. 26(b) Online Portability Register / Export Schema Docs URL."
+      },
+      "trustOrJurisdictionUrl": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Discovered Trust Center, Security, Subprocessors, or Art. 28 Jurisdiction URL."
+      },
+      "pricingOrPlansUrl": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Discovered SaaS Pricing or Plans URL."
+      },
+      "termsOrMsaUrl": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Discovered Terms of Service, MSA, or DPA URL."
+      },
+      "discoveredLinks": {
+        "type": "object",
+        "description": "Structured Data Act addendum, Art. 26(b) register, Trust/Art. 28 jurisdiction, pricing, and Terms/MSA URLs discovered on the domain."
+      },
+      "findingsCount": {
+        "type": "integer",
+        "description": "Total number of EU Data Act & DORA compliance findings flagged."
+      },
+      "findings": {
+        "type": "array",
+        "description": "Prioritized technical compliance findings with ruleId, regulation, severity, evidence, and recommendation."
+      },
+      "coldOutreachHook": {
+        "type": "string",
+        "description": "Neutral, factual 1-2 sentence B2B outreach observation tailored for EU Data Act Legal, GRC/Trust-Center, and Cloud Migration consultancies."
+      },
+      "remediationPackGenerated": {
+        "type": "boolean",
+        "description": "Whether an EU Data Act Switching Addendum + Art. 26(b)/28 Register + /pricing €0 Egress Widget HTML/JS pack was generated."
+      },
+      "remediationPack": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Copy-pasteable euDataActSwitchingAddendumHtml, onlinePortabilityRegisterAndArt28Html, and pricingZeroEgressDisclosureWidgetHtmlJs."
+      },
+      "recommendedNextAudits": {
+        "type": "array",
+        "description": "Recommended follow-up Apify Actors across the 6-Actor US/UK/EU/ADA/Privacy/Cloud Compliance Suite."
+      },
+      "disclaimer": {
+        "type": "string",
+        "description": "Mandatory technical heuristic & non-legal-advice disclaimer."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "EU Data Act SaaS Switching & Zero-Egress Overview",
+      "transformation": {
+        "fields": [
+          "url",
+          "isSaasOrCloudServiceDetected",
+          "complianceScore",
+          "riskTier",
+          "billingSdkVendors",
+          "authIdentityVendors",
+          "trustCenterGrcVendors",
+          "egressOrSwitchingFeeFound",
+          "exportPaywallOrTierLockFound",
+          "shortPostTerminationRetentionFound",
+          "excessiveNoticePeriodLockInFound",
+          "switchingAddendumFound",
+          "art26bOnlinePortabilityRegisterFound",
+          "art28NonPersonalGovAccessSafeguardsDisclosed",
+          "coldOutreachHook",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "url": {
+            "label": "SaaS / Cloud URL",
+            "format": "link"
+          },
+          "isSaasOrCloudServiceDetected": {
+            "label": "SaaS/Cloud",
+            "format": "boolean"
+          },
+          "complianceScore": {
+            "label": "Compliance Score (0-100)",
+            "format": "number"
+          },
+          "riskTier": {
+            "label": "Risk Tier",
+            "format": "text"
+          },
+          "billingSdkVendors": {
+            "label": "Billing SDKs",
+            "format": "array"
+          },
+          "authIdentityVendors": {
+            "label": "Auth SDKs",
+            "format": "array"
+          },
+          "trustCenterGrcVendors": {
+            "label": "Trust/GRC",
+            "format": "array"
+          },
+          "egressOrSwitchingFeeFound": {
+            "label": "Egress/Exit Fee",
+            "format": "boolean"
+          },
+          "exportPaywallOrTierLockFound": {
+            "label": "Export Paywall",
+            "format": "boolean"
+          },
+          "shortPostTerminationRetentionFound": {
+            "label": "<30d Deletion",
+            "format": "boolean"
+          },
+          "excessiveNoticePeriodLockInFound": {
+            "label": ">2mo Notice",
+            "format": "boolean"
+          },
+          "switchingAddendumFound": {
+            "label": "Art. 25 Addendum",
+            "format": "boolean"
+          },
+          "art26bOnlinePortabilityRegisterFound": {
+            "label": "Art. 26(b) Register",
+            "format": "boolean"
+          },
+          "art28NonPersonalGovAccessSafeguardsDisclosed": {
+            "label": "Art. 28/32 Notice",
+            "format": "boolean"
+          },
+          "coldOutreachHook": {
+            "label": "Cold Outreach Hook",
+            "format": "text"
+          },
+          "status": {
+            "label": "Status",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

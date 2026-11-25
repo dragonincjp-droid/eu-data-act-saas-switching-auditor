@@ -1,0 +1,22 @@
+{
+  "apifyHostedMcpGateway": {
+    "mcpServers": {
+      "eu-data-act-saas-switching-auditor": {
+        "url": "https://mcp.apify.com/?tools=healthy_addax/eu-data-act-saas-switching-auditor",
+        "headers": {
+          "Authorization": "Bearer <YOUR_APIFY_TOKEN>"
+        }
+      }
+    }
+  },
+  "globalComplianceSuiteMcp": {
+    "mcpServers": {
+      "us-uk-eu-saas-ecommerce-compliance-suite": {
+        "url": "https://mcp.apify.com/?tools=healthy_addax/eu-data-act-saas-switching-auditor,healthy_addax/us-click-to-cancel-auditor,healthy_addax/cipa-vppa-wiretap-pixel-auditor,healthy_addax/wcag-eaa-ada-auditor,healthy_addax/eu-withdrawal-omnibus-auditor,healthy_addax/fake-reviews-dmcc-drip-pricing-auditor",
+        "headers": {
+          "Authorization": "Bearer <YOUR_APIFY_TOKEN>"
+        }
+      }
+    }
+  }
+}

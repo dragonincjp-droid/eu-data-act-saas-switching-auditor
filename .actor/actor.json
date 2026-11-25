@@ -1,0 +1,19 @@
+{
+  "actorSpecification": 1,
+  "name": "eu-data-act-saas-switching-auditor",
+  "title": "EU Data Act SaaS Switching & Zero-Egress Fee Auditor",
+  "description": "Bulk-audit SaaS & cloud sites via fast HTTP for EU Data Act (Reg. 2023/2854) Jan 2027 €0 egress/switching rules, Art. 25 30-day transition/retrieval terms, Art. 26(b) data registers & Art. 28 jurisdiction disclosures.",
+  "version": "1.0",
+  "buildTag": "latest",
+  "minMemoryMbytes": 256,
+  "maxMemoryMbytes": 1024,
+  "usesStandbyMode": true,
+  "webServerMcpPath": "/mcp",
+  "dockerfile": "../Dockerfile",
+  "readme": "../README.md",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  }
+}

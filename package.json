@@ -1,0 +1,49 @@
+{
+  "name": "eu-data-act-saas-switching-auditor",
+  "version": "1.0.0",
+  "description": "Zero-Playwright HTTP compliance auditor for EU Data Act (Reg. (EU) 2023/2854 Chapter VI) Jan 12, 2027 €0 SaaS/cloud switching & egress fee cliff (Art. 29(1)), Art. 30(2) free open export interfaces, Art. 25(2) 30-day transition/retrieval terms, Art. 26(b) online portability registers, Art. 28/32 ICT jurisdiction & non-personal data gov-access notices, and EU DORA exit readiness with HTML/JS fixes & Standby MCP Server.",
+  "type": "module",
+  "main": "dist/main.js",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dragonincjp-droid/eu-data-act-saas-switching-auditor.git"
+  },
+  "scripts": {
+    "build": "node src/build.mjs",
+    "start": "node dist/main.js",
+    "start:prod": "node dist/main.js",
+    "start:standby": "node dist/main.js --standby",
+    "test": "ALLOW_LOCALHOST_FOR_TESTS=1 node --test tests/auditor.e2e.test.mjs",
+    "typecheck": "node src/build.mjs --check",
+    "lint": "node src/build.mjs --check"
+  },
+  "keywords": [
+    "apify",
+    "actor",
+    "mcp",
+    "eu-data-act",
+    "cloud-switching",
+    "egress-fees",
+    "saas-compliance",
+    "data-portability",
+    "dora",
+    "b2b-leads",
+    "stripe",
+    "vanta",
+    "drata",
+    "regulatory-tech",
+    "lead-generation"
+  ],
+  "author": "Autonomous Venture Studio",
+  "license": "MIT",
+  "dependencies": {
+    "apify": "3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.5",
+    "typescript": "5.7.3"
+  }
+}
